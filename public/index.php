@@ -12,18 +12,18 @@ $app->container->singleton('db', function () {
 });
 
 //api-buddies
-$app->get('/persons(/:personid)','getPersons');
-$app->post('/persons(/:personid)','setPersons');
+$app->get('/person(/:personid)','getPerson');
+$app->post('/person(/:personid)','setPerson');
 
 //api-users
-$app->get('/users(/:userid)','getUsers');
-$app->post('/users(/:userid)','setUsers');
+$app->get('/user(/:userid)','getUser');
+$app->post('/user(/:userid)','setUser');
 
 
 $app->run();
 
-function getPersons($personid="") {
-	// echo "getPersons ".$personid;
+function getPerson($personid="") {
+	// echo "getPerson ".$personid;
 	//create app instance object
 	$app = \Slim\Slim::getInstance();
 	//create db object from apps instance object
@@ -38,7 +38,7 @@ function getPersons($personid="") {
 	if ($personid!=""){
 		$action="selectone";
 		//fetch as field arrays
-		$tblperson = $db1->tblperson("regemail= ?", $personid)->fetch();
+		$tblperson = $db1->tblperson("id= ?", $personid)->fetch();
 		if (!empty($tblperson)){
 			$result[]=array(
 				"id"=> $tblperson["id"],
@@ -77,8 +77,8 @@ function getPersons($personid="") {
     ]));	
 }
 
-function setPersons($personid="") {
-	//echo "setPersons ".$personid;
+function setPerson($personid="") {
+	//echo "setPerson ".$personid;
 	//create app instance object
 	$app = \Slim\Slim::getInstance();
 	//create db object from apps instance object
@@ -169,7 +169,7 @@ function setPersons($personid="") {
 }
 
 
-function getUsers($userid="") {
+function getUser($userid="") {
 	// echo "getUsers ".$userid;
 	//create app instance object
 	$app = \Slim\Slim::getInstance();
@@ -224,7 +224,7 @@ function getUsers($userid="") {
     ]));	
 }
 
-function setUsers($userid="") {
+function setUser($userid="") {
 	//echo "setUsers ".$userid;
 	//create app instance object
 	$app = \Slim\Slim::getInstance();
